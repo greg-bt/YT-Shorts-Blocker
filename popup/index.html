@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        @media only screen and (min-width: 300px) { body { width: auto !important } }
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            width: 215px; margin: 10px;
+            overflow: hidden;
+        }
+        * {padding: 0; margin: 0; user-select: none;}
+        input { width: 100%; } 
+        pre { white-space: pre-wrap; }
+        input[type="checkbox"] { width: auto; margin-top: 8px }
+        .inline {display: inline-block;}
+    </style>
+</head>
+
+<body>
+
+    <h2><strong>YT Shorts Blocker</strong></h2>
+    <pre>Hide YouTube Shorts & videos under 3 minutes long.</pre>
+
+    <br>
+
+    <div style="text-align: center;">
+        
+        <h3><strong>Video Filter</strong></h3>
+        <input type="range" min=0 max=20 value=4 >
+        <pre>Hiding videos under x minutes</pre>
+
+        <br>
+
+        <h3><strong>Filter Visibility</strong></h3>
+        <input type="range" min=3 max=25 value=5>
+        <pre>This visible</pre>
+
+        <br>
+
+        <h3><strong>YT Homepage</strong></h3>
+        <input type="checkbox">
+        <pre class="inline">Disabled</pre>
+
+        <br>
+        <br>
+
+        <pre>Feedback is appreciated, I am happy to include new features!<a href="https://addons.mozilla.org/en-GB/firefox/addon/yt-shorts-blocker/">https://addons.mozilla.org/</a></pre>
+
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

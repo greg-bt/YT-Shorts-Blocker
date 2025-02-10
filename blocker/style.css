@@ -1,0 +1,15 @@
+/*   ###   Hide Shorts Elements   ###   */
+
+/* Homepage Shelfs */
+ytd-reel-shelf-renderer, 
+ytd-rich-section-renderer,
+ytm-reel-shelf-renderer,
+ytm-rich-section-renderer,
+
+/* Shorts Buttons */
+ytm-pivot-bar-item-renderer:has(.pivot-shorts),
+ytd-guide-entry-renderer:has(a.yt-simple-endpoint.style-scope[title="Shorts"]),
+ytd-mini-guide-entry-renderer:has(a.yt-simple-endpoint.style-scope[title="Shorts"]),
+yt-tab-shape[tab-title="Shorts"]
+
+{ display: none !important }
