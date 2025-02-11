@@ -20,6 +20,7 @@ function applyFilter() {
 			browser.storage.sync.set({
 				length: 2,
 				opacity: 5,
+				allvideos: false,
 				homepage: true
 			});
 			location.reload()
@@ -35,7 +36,7 @@ function applyFilter() {
 		console.log(res.length)
 
 		// Populate sheet
-		var index = [...Array(res.length).keys()].flatMap(i => [i + 1, i + 1])
+		var index = [...Array(res.length).keys()].flatMap(i => [i + 1, i + 1, i + 1])
 
 		let plat = (window.location.host.includes("www") ? "ytd" : "ytm")
 		style.sheet.insertRule(
@@ -44,10 +45,15 @@ function applyFilter() {
 
 			// Homepage
 			(res.homepage ? "" : "ytd-browse[page-subtype='home'],div[tab-title='Home'],") +
-
-			// Videos
+	
+			// Filter Videos
 			(res.length >= 0 ?
-				`${plat}-rich-item-renderer:has(h3 ${(plat == "ytm"? "span" : "a")}[aria-label*=" # minute"]:not([aria-label*="minutes ago"])),${plat}-${(plat=="ytm"?"video-with-context":"compact-video")}-renderer:has(h3 span[aria-label*=" # minute"]:not([aria-label*="minutes ago"])),`.repeat(res.length).replace(/#/g, () => index.pop()) +
+
+				// All Videos
+				((res.allvideos ? `${(plat == "ytm" ? "ytm-compact" : "ytd")}-video-renderer:has(${(plat == "ytm"? "h4 span" : "h3 a")}[aria-label*=" # minute"]:not([aria-label*="minutes ago"]):not([aria-label*=" hour,"]):not([aria-label*=" hours,"])),` : "") +
+
+				// Recommended Videos
+				`${plat}-rich-item-renderer:has(h3 ${(plat == "ytm"? "span" : "a")}[aria-label*=" # minute"]:not([aria-label*="minutes ago"]):not([aria-label*=" hour,"]):not([aria-label*=" hours,"])),${plat}-${(plat=="ytm"?"video-with-context":"compact-video")}-renderer:has(h3 span[aria-label*=" # minute"]:not([aria-label*="minutes ago"]):not([aria-label*=" hour,"]):not([aria-label*=" hours,"])),`).repeat(res.length).replace(/#/g, () => index.pop()) +
 				`${plat}-rich-item-renderer:has(h3 ${(plat == "ytm"? "span" : "a")}[aria-label*=" seconds"]:not([aria-label*=" minutes,"]):not([aria-label*=" hour,"]):not([aria-label*=" hours,"])),${plat}-${(plat=="ytm"?"video-with-context":"compact-video")}-renderer:has(h3 span[aria-label*=" seconds"]:not([aria-label*=" minutes,"]):not([aria-label*=" hour,"]):not([aria-label*=" hour,"])),`
 			: "") +
 

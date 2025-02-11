@@ -1,9 +1,11 @@
 // Range input elements
-var lengthInput = document.getElementsByTagName("input")[0];
-var opacityInput = document.getElementsByTagName("input")[1];
-var homepageInput = document.getElementsByTagName("input")[2];
+var lengthInput = document.getElementsByTagName("input")[0]
+var opacityInput = document.getElementsByTagName("input")[1]
+var videosInput = document.getElementsByTagName("input")[2]
+var homepageInput = document.getElementsByTagName("input")[3]
 
 // Update bottom text on change
+videosInput.oninput = () => { videosInput.nextElementSibling.textContent = ( videosInput.checked ? "Filtering All YT Videos" : "Filtering Recomended Only") }
 homepageInput.oninput = () => { homepageInput.nextElementSibling.textContent = ( homepageInput.checked ? "Enabled" : "Disabled") }
 lengthInput.oninput = () => { lengthInput.nextElementSibling.textContent = ( lengthInput.value == 0 ? "All videos are fully visible" : `Hiding videos under ${lengthInput.value} minutes` ) }
 opacityInput.oninput = () => {
@@ -14,12 +16,14 @@ opacityInput.oninput = () => {
 // Save changes to browser storage
 lengthInput.onchange = saveChanges
 opacityInput.onchange = saveChanges
+videosInput.onchange = saveChanges
 homepageInput.onchange = saveChanges
 
 async function saveChanges() {
 	await browser.storage.sync.set({
 		length:  lengthInput.valueAsNumber-1,
 		opacity: opacityInput.valueAsNumber,
+		allvideos: videosInput.checked,
 		homepage: homepageInput.checked
 	});
 }
@@ -34,8 +38,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
 		opacityInput.value = res.opacity;
 		opacityInput.oninput()
 
+		videosInput.checked = res.allvideos;
+		videosInput.oninput()
+
 		homepageInput.checked = res.homepage;
-		homepageInput.oninput();
+		homepageInput.oninput()
 
 	});
 })
